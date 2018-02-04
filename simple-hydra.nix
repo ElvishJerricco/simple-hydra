@@ -79,7 +79,7 @@
 
     services.hydra = {
       enable = true;  
-      hydraURL = "http://${hostName}";
+      hydraURL = lib.mkOptionDefault "https://${hostName}";
       notificationSender = "hydra@${hostName}";
       useSubstitutes = true;
       smtpHost = "localhost";
