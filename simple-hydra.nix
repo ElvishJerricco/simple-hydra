@@ -58,6 +58,14 @@
       type = lib.types.bool;
       default = true;
     };
+
+    recommendedNixSettings = lib.mkOption {
+      description = ''
+        Configures automatic Nix GC and store optimisation.
+      '';
+      type = lib.types.bool;
+      default = false;
+    };
   };
 
   config = let
@@ -129,13 +137,13 @@
       '';
     };
 
-    # nix.gc = {
-    #   automatic = true;
-    #   dates = "15 3 * * *";
-    # };
+    nix.gc = lib.mkIf config.simple-hydra.recommendedNixSettings {
+      automatic = true;
+      dates = "15 3 * * *";
+    };
+    nix.autoOptimiseStore = lib.mkIf config.simple-hydra.recommendedNixSettings true;
 
     nix.trustedUsers = ["hydra" "hydra-evaluator" "hydra-queue-runner"];
-    # nix.autoOptimiseStore = true
 
     nix.buildMachines = lib.mkIf config.simple-hydra.localBuilder.enable [
       {
