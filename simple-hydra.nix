@@ -74,6 +74,7 @@
     services.postfix = {
       enable = true;
       setSendmail = true;
+      domain = hostName;
     };
 
     services.postgresql = {
@@ -104,9 +105,7 @@
       virtualHosts."${hostName}" = {
         forceSSL = true;
         enableACME = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString config.services.hydra.port}";
-        };
+        locations."/".proxyPass = "http://127.0.0.1:${toString config.services.hydra.port}";
       };
     };
 
