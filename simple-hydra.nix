@@ -74,7 +74,6 @@
     services.postfix = {
       enable = true;
       setSendmail = true;
-      domain = hostName;
     };
 
     services.postgresql = {
@@ -93,8 +92,9 @@
       useSubstitutes = true;
       smtpHost = "localhost";
       extraConfig = ''
-        store_uri = file:///nix/store?secret-key=/etc/nix/${hostName}/secret
+        store_uri = file:///var/lib/hydra/cache?secret-key=/etc/nix/${hostName}/secret
         binary_cache_secret_key_file = /etc/nix/${hostName}/secret
+        binary_cache_dir = /var/lib/hydra/cache
       ''; 
     };
 
@@ -128,6 +128,9 @@
           /run/current-system/sw/bin/chown -R hydra:hydra /etc/nix/${hostName}
           /run/current-system/sw/bin/chmod 440 /etc/nix/${hostName}/secret
           /run/current-system/sw/bin/chmod 444 /etc/nix/${hostName}/public
+          # create cache
+          /run/current-system/sw/bin/install -d -m 755 /var/lib/hydra/cache
+          /run/current-system/sw/bin/chown -R hydra-queue-runner:hydra /var/lib/hydra/cache
           # done
           touch ~hydra/.setup-is-complete
         fi
