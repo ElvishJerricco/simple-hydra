@@ -1,7 +1,7 @@
 `simple-hydra`
 ---
 
-`simple-hydra.nix` is a NixOS module for easily setting up hydra. To
+`simple-hydra` is a NixOS module for easily setting up hydra. To
 use it, simply add this to your `configuration.nix`:
 
 ```nix
@@ -21,4 +21,4 @@ use it, simply add this to your `configuration.nix`:
 }
 ```
 
-See `simple-hydra.nix` for descriptions of other available options.
+See `default.nix` for descriptions of other available options.
