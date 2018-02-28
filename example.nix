@@ -6,7 +6,7 @@
 { pkgs, config, ... }:
 
 {
-  imports = [./simple-hydra.nix <nixpkgs/nixos/modules/virtualisation/qemu-vm.nix>];
+  imports = [./. <nixpkgs/nixos/modules/virtualisation/qemu-vm.nix>];
 
   users.users.root.initialPassword = "test";
 

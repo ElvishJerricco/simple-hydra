@@ -10,7 +10,7 @@ use it, simply add this to your `configuration.nix`:
 
   # ...
 
-  imports = [./simple-hydra/simple-hydra.nix];
+  imports = [./simple-hydra];
   simple-hydra = {
     enable = true;
     hostName = "example.org";
