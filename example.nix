@@ -30,6 +30,7 @@
 
   simple-hydra.enable = true;
   simple-hydra.hostName = "hydra.example.org";
+  simple-hydra.useNginx = false;
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [ 3000 ];
 }
