@@ -66,6 +66,13 @@
       type = lib.types.bool;
       default = false;
     };
+
+    store_uri = lib.mkOption {
+      description = ''
+      '';
+      type = lib.types.str;
+      defaultText = "file:///var/lib/hydra/cache?secret-key=/etc/nix/\${hostName}/secret";
+    };
   };
 
   config = let
@@ -82,6 +89,8 @@
       package = pkgs.postgresql; 
     };
 
+    simple-hydra.store_uri = lib.mkOptionDefault "file:///var/lib/hydra/cache?secret-key=/etc/nix/${hostName}/secret";
+
     programs.ssh.extraConfig = ''
       StrictHostKeyChecking no
     '';
@@ -93,7 +102,7 @@
       useSubstitutes = true;
       smtpHost = "localhost";
       extraConfig = ''
-        store_uri = file:///var/lib/hydra/cache?secret-key=/etc/nix/${hostName}/secret
+        store_uri = ${config.simple-hydra.store_uri}
       ''; 
     };
 
