@@ -11,6 +11,7 @@ use it, simply add this to your `configuration.nix`:
   # ...
 
   imports = [./simple-hydra];
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
   simple-hydra = {
     enable = true;
     hostName = "example.org";
