@@ -123,7 +123,7 @@
       wantedBy = [ "multi-user.target" ];
       requires = [ "hydra-init.service" ];
       after = [ "hydra-init.service" ];
-      environment = config.systemd.services.hydra-init.environment;
+      environment = builtins.removeAttrs (config.systemd.services.hydra-init.environment) ["PATH"];
       script = ''
         if [ ! -e ~hydra/.setup-is-complete ]; then
           # create admin user (remember to change the password)
