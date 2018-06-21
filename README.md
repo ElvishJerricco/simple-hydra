@@ -23,3 +23,10 @@ use it, simply add this to your `configuration.nix`:
 ```
 
 See `default.nix` for descriptions of other available options.
+
+Once the server is running, you need to create an admin user on the
+command line.
+
+```bash
+hydra-create-user USERNAME --full-name 'FULL NAME' --email-address 'EMAIL' --password 12345 --role admin
+```

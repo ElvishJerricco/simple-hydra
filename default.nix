@@ -117,7 +117,7 @@
     };
 
     systemd.services.hydra-manual-setup = {
-      description = "Create Admin User for Hydra";
+      description = "Initial setup for Hydra";
       serviceConfig.Type = "oneshot";
       serviceConfig.RemainAfterExit = true;
       wantedBy = [ "multi-user.target" ];
@@ -126,8 +126,6 @@
       environment = builtins.removeAttrs (config.systemd.services.hydra-init.environment) ["PATH"];
       script = ''
         if [ ! -e ~hydra/.setup-is-complete ]; then
-          # create admin user (remember to change the password)
-          /run/current-system/sw/bin/hydra-create-user admin --full-name 'admin' --email-address 'hydra@${hostName}' --password admin --role admin
           # create signing keys
           /run/current-system/sw/bin/install -d -m 551 /etc/nix/${hostName}
           /run/current-system/sw/bin/nix-store --generate-binary-cache-key ${hostName} /etc/nix/${hostName}/secret /etc/nix/${hostName}/public
