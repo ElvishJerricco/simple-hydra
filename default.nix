@@ -46,6 +46,14 @@
         type = lib.types.listOf lib.types.str;
         default = ["x86_64-linux" "i686-linux"];
       };
+
+      supportedFeatures = lib.mkOption {
+        description = ''
+          Features to supply for `supportedFeatures`.
+        '';
+        type = lib.types.listOf lib.types.string;
+        default = [];
+      };
     };
 
     useNginx = lib.mkOption {
@@ -154,6 +162,7 @@
         hostName = "localhost";
         systems = config.simple-hydra.localBuilder.systems;
         maxJobs = config.simple-hydra.localBuilder.maxJobs;
+        supportedFeatures = config.simple-hydra.localBuilder.supportedFeatures;
       }
     ];
   };
